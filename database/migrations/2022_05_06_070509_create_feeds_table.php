@@ -16,6 +16,7 @@ class CreateFeedsTable extends Migration
         Schema::create('feeds', function (Blueprint $table) {
             $table->id();
             $table->longText('description');
+            $table->longText('image');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
 
