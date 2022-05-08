@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class FeedApiController extends Controller
 {
     public function feed(){
-        $feeds = Feed::all();
+        $feeds = Feed::latest('id')->with('user')->get();
         return $feeds;
     }
 
@@ -79,7 +79,8 @@ class FeedApiController extends Controller
            }
            $feed_id = request()->feed_id;
 
-           $comments = Feed::find($feed_id)->comment;
+           //$comments = Feed::find($feed_id)->comment;
+           $comments = Comment::where('feed_id',$feed_id)->with('user')->paginate(2);
 
        return response()->json([
            'status'=>200,

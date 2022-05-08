@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthApiContoller;
 use App\Http\Controllers\FeedApiController;
+use App\Http\Controllers\LikeApiController;
 
 
 
@@ -22,6 +23,7 @@ Route::group(['middleware'=>'auth:api'],function () {
     Route::delete('comment/delete/',[FeedApiController::class,'deleteComment']);
 
 
+    Route::post('like',[LikeApiController::class,'like']);
 });
 
 
