@@ -10,12 +10,12 @@ class LikeApiController extends Controller
 {
     public function like(Request $request){
 
-        $user_id = $request->user_id;
+        $user_id = Auth::id();
         $feed_id = $request->feed_id;
 //        return $this->islike($user_id,$feed_id);
         if(!$this->islike($user_id,$feed_id)){
             $like = new Like();
-            $like->user_id = $request->user_id;
+            $like->user_id = Auth::id();
             $like->feed_id = $request->feed_id;
 
             $like->save();
@@ -46,5 +46,16 @@ class LikeApiController extends Controller
             return  false;
         }
 
+    }
+
+    public function unlike(){
+        $like_id = request()->like_id;
+        Like::where('id',$like_id)->delete();
+        return response()->json([
+            'status'=>200,
+            'message'=>'success',
+            'data'=>'Unlike',
+
+        ]);
     }
 }

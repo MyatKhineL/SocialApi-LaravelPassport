@@ -24,6 +24,7 @@ Route::group(['middleware'=>'auth:api'],function () {
 
 
     Route::post('like',[LikeApiController::class,'like']);
+    Route::delete('unlike',[LikeApiController::class,'unlike']);
 });
 
 
