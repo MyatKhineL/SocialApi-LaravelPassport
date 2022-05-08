@@ -14,7 +14,13 @@ Route::post('/login',[AuthApiContoller::class,'login']);
 
 
 Route::group(['middleware'=>'auth:api'],function () {
+    Route::get('/feed',[FeedApiController::class,'feed']);
     Route::post('/feed/create',[FeedApiController::class,'create']);
+
+    Route::post('comment/create',[FeedApiController::class,'createcomment']);
+    Route::get('comment',[FeedApiController::class,'getComment']);
+    Route::delete('comment/delete/',[FeedApiController::class,'deleteComment']);
+
 
 });
 
